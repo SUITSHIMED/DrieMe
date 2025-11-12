@@ -1,8 +1,9 @@
 // app/index.js
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { CASA_CENTER, USER_POSITION, AVAILABLE_TAXIS } from '../data/taxiData';
+import { Link } from 'expo-router'; 
 
 export default function HomeScreen() {
   return (
@@ -10,7 +11,7 @@ export default function HomeScreen() {
       <MapView
         style={styles.map}
         initialRegion={CASA_CENTER}
-        showsUserLocation={false}
+        
       >
         <Marker coordinate={USER_POSITION} pinColor="blue" title="Vous" />
         {AVAILABLE_TAXIS.map((taxi) => (
@@ -22,6 +23,13 @@ export default function HomeScreen() {
           />
         ))}
       </MapView>
+
+      
+      <View style={styles.buttonContainer}>
+        <Link href="/booking" asChild>
+          <Button title="Réserver un Taxi" color="#e53935" />
+        </Link>
+      </View>
     </View>
   );
 }
@@ -29,4 +37,12 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { flex: 1 },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 40,
+    left: 20,
+    right: 20,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
 });
